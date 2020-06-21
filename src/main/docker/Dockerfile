@@ -1,5 +1,5 @@
 # From Spring Boot 2.3.0.RELEASE they have <layertools>
-# https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#layering-docker-images
+# https://docs.spring.io/spring-boot/docs/2.3.0.RELEASE/reference/htmlsingle/#layering-docker-images
 FROM adoptopenjdk:11.0.7_10-jre-hotspot as builder
 WORKDIR /app
 ARG JAR_FILE=target/*.jar
