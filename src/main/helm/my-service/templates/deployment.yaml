@@ -1,16 +1,16 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "spring-boot.fullname" . }}
+  name: {{ include "my-service.fullname" . }}
   labels:
-    {{- include "spring-boot.labels" . | nindent 4 }}
+    {{- include "my-service.labels" . | nindent 4 }}
 spec:
 {{- if not .Values.autoscaling.enabled }}
   replicas: {{ .Values.replicaCount }}
 {{- end }}
   selector:
     matchLabels:
-      {{- include "spring-boot.selectorLabels" . | nindent 6 }}
+      {{- include "my-service.selectorLabels" . | nindent 6 }}
   template:
     metadata:
     {{- with .Values.podAnnotations }}
@@ -18,13 +18,13 @@ spec:
         {{- toYaml . | nindent 8 }}
     {{- end }}
       labels:
-        {{- include "spring-boot.selectorLabels" . | nindent 8 }}
+        {{- include "my-service.selectorLabels" . | nindent 8 }}
     spec:
       {{- with .Values.imagePullSecrets }}
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      serviceAccountName: {{ include "spring-boot.serviceAccountName" . }}
+      serviceAccountName: {{ include "my-service.serviceAccountName" . }}
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
       containers:
