@@ -25,7 +25,7 @@ case ${option} in
       REPO="semantic-versioning-on-docker-build-and-helm-chart"
       TAG="v$next_version"
       FILE_NAME=my-service-"$next_version".tgz
-      FILE_PATH="./target/helm/repo/$next_version"
+      FILE_PATH="./target/helm/repo/$FILE_NAME"
 
       # Find a release by tag then upload a file:
       "$HOME"/ok.sh list_releases "$USER" "$REPO" \
