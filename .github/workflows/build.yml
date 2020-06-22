@@ -15,7 +15,7 @@ jobs:
         with:
           java-version: 11
       - name: Build
-        run: bot.sh --prepare
+        run: ./bot.sh --prepare
       - uses: actions/setup-node@v1
         name: Install semantic-release
         if: github.ref == 'refs/heads/master' && github.event_name == 'push'
