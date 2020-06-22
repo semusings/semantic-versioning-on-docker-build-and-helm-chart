@@ -13,8 +13,3 @@ help:
 
 build: ## Build
 	./bot.sh --prepare
-
-##@ Release
-
-release: ## Release
-	./bot.sh --publish
