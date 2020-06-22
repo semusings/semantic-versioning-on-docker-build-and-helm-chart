@@ -1,0 +1,30 @@
+name: Java CI
+
+on:
+  push:
+    branches:
+      - '*'
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    name: Build
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up JDK 11
+        uses: actions/setup-java@v1
+        with:
+          java-version: 11
+      - name: Build
+        run: ci/build.sh --prepare
+      - uses: actions/setup-node@v1
+        name: Install semantic-release
+        if: github.ref == 'refs/heads/master' && github.event_name == 'push'
+        with:
+          node-version: "12.x"
+      - name: Release
+        if: github.ref == 'refs/heads/master' && github.event_name == 'push'
+        run: |
+          npm install -g semantic-release @semantic-release/{git,changelog,exec}
+          semantic-release
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
