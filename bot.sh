@@ -18,7 +18,7 @@ case ${option} in
 
       docker push docker.pkg.github.com/bhuwanupadhyay/semantic-versioning-on-docker-build-and-helm-chart/my-service:"$next_version"
 
-      # Publish Helm chart
+      # Publish Helm chart in Github Releases
       curl "https://raw.githubusercontent.com/whiteinge/ok.sh/master/ok.sh" -o "ok.sh"
       chmod +x ok.sh
       USER="BhuwanUpadhyay"
