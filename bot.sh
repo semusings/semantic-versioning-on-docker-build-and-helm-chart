@@ -1,5 +1,6 @@
 option="${1}"
-next_version="${2}"
+default_version='0.0.0-SNAPSHOT'
+next_version="${2:-$default_version}"
 case ${option} in
    --prepare)
       ./mvnw \
