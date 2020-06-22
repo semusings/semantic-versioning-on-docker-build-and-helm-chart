@@ -13,10 +13,9 @@ case ${option} in
       # docker push docker.io/bhuwanupadhyay/my-service:"$next_version"
 
       # Publish Docker in Github Packages <https://github.com/BhuwanUpadhyay/semantic-versioning-on-docker-build-and-helm-chart/packages>
-      docker tag docker.io/bhuwanupadhyay/my-service:"$next_version" \
-        docker.pkg.github.com/bhuwanupadhyay/semantic-versioning-on-docker-build-and-helm-chart/my-service:"$next_version"
-
-      docker push docker.pkg.github.com/bhuwanupadhyay/semantic-versioning-on-docker-build-and-helm-chart/my-service:"$next_version"
+      DOCKER_PKG=docker.pkg.github.com/bhuwanupadhyay/semantic-versioning-on-docker-build-and-helm-chart/my-service:"$next_version"
+      docker tag docker.io/bhuwanupadhyay/my-service:"$next_version" "$DOCKER_PKG"
+      docker push "$DOCKER_PKG"
 
       # Publish Helm chart in Github Releases
       curl "https://raw.githubusercontent.com/whiteinge/ok.sh/master/ok.sh" -o "ok.sh"
