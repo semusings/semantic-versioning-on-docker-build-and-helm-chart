@@ -75,6 +75,16 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <layout>JAR</layout>
+                </configuration>
             </plugin>
             <plugin>
                 <groupId>org.jetbrains.kotlin</groupId>
@@ -121,29 +131,26 @@
                 </executions>
             </plugin>
             <plugin>
-                <groupId>io.fabric8</groupId>
-                <artifactId>fabric8-maven-plugin</artifactId>
-                <version>4.4.1</version>
+                <groupId>com.spotify</groupId>
+                <artifactId>dockerfile-maven-plugin</artifactId>
+                <version>1.4.13</version>
                 <executions>
                     <execution>
-                        <phase>package</phase>
+                        <id>default</id>
                         <goals>
                             <goal>build</goal>
+                            <goal>push</goal>
                         </goals>
-                        <configuration>
-                            <verbose>true</verbose>
-                            <useColor>true</useColor>
-                            <images>
-                                <image>
-                                    <name>docker.io/bhuwanupadhyay/${project.artifactId}:${project.version}</name>
-                                    <build>
-                                        <dockerFileDir>src/main/docker/Dockerfile</dockerFileDir>
-                                    </build>
-                                </image>
-                            </images>
-                        </configuration>
                     </execution>
                 </executions>
+                <configuration>
+                    <repository>docker.io/bhuwanupadhyay/${project.artifactId}</repository>
+                    <tag>${project.version}</tag>
+                    <dockerConfigFile>src/main/docker/Dockerfile</dockerConfigFile>
+                    <buildArgs>
+                        <JAR_FILE>${project.build.finalName}.jar</JAR_FILE>
+                    </buildArgs>
+                </configuration>
             </plugin>
             <plugin>
                 <groupId>com.kiwigrid</groupId>
