@@ -8,9 +8,15 @@ case ${option} in
         clean install -Drevision="$next_version"
       ;;
    --publish)
-      # Publish Docker image
-      docker login -u developerbhuwan -p "$DOCKER_PASSWORD"
-      docker push docker.io/bhuwanupadhyay/my-service:"$next_version"
+      # Publish Docker by login
+      # docker login -u developerbhuwan -p "$DOCKER_PASSWORD"
+      # docker push docker.io/bhuwanupadhyay/my-service:"$next_version"
+
+      # Publish Docker in Github Packages <https://github.com/BhuwanUpadhyay/semantic-versioning-on-docker-build-and-helm-chart/packages>
+      docker tag docker.io/bhuwanupadhyay/my-service:"$next_version" \
+        docker.pkg.github.com/bhuwanupadhyay/semantic-versioning-on-docker-build-and-helm-chart/my-service:"$next_version"
+
+      docker push docker.pkg.github.com/bhuwanupadhyay/semantic-versioning-on-docker-build-and-helm-chart/my-service:"$next_version"
 
       # Publish Helm chart
       curl "https://raw.githubusercontent.com/whiteinge/ok.sh/master/ok.sh" -o "ok.sh"
