@@ -18,8 +18,8 @@ case ${option} in
       docker push "$DOCKER_PKG"
 
       # Publish Helm chart in Github Releases
-      curl "https://raw.githubusercontent.com/whiteinge/ok.sh/master/ok.sh" -o "ok.sh"
-      chmod +x ok.sh
+      curl "https://raw.githubusercontent.com/whiteinge/ok.sh/master/ok.sh" -o "$HOME/ok.sh"
+      chmod +x "$HOME"/ok.sh
       USER="BhuwanUpadhyay"
       REPO="semantic-versioning-on-docker-build-and-helm-chart"
       TAG="v$next_version"
@@ -27,7 +27,7 @@ case ${option} in
       FILE_PATH="target/helm/repo/$next_version"
 
       # Find a release by tag then upload a file:
-      ./ok.sh list_releases "$USER" "$REPO" \
+      "$HOME"/ok.sh list_releases "$USER" "$REPO" \
           | awk -v "tag=$TAG" -F'\t' '$2 == tag { print $3 }' \
           | xargs -I@ ok.sh release "$USER" "$REPO" @ _filter='.upload_url' \
           | sed 's/{.*$/?name='"$FILE_NAME"'/' \
