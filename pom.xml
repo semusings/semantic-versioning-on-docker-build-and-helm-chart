@@ -146,7 +146,7 @@
                 <configuration>
                     <repository>docker.io/bhuwanupadhyay/${project.artifactId}</repository>
                     <tag>${project.version}</tag>
-                    <dockerConfigFile>src/main/docker/Dockerfile</dockerConfigFile>
+                    <dockerConfigFile>src/main/Dockerfile</dockerConfigFile>
                     <buildArgs>
                         <JAR_FILE>${project.build.finalName}.jar</JAR_FILE>
                     </buildArgs>
