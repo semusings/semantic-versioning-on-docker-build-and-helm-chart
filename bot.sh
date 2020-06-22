@@ -14,6 +14,7 @@ case ${option} in
 
       # Publish Docker in Github Packages <https://github.com/BhuwanUpadhyay/semantic-versioning-on-docker-build-and-helm-chart/packages>
       DOCKER_PKG=docker.pkg.github.com/bhuwanupadhyay/semantic-versioning-on-docker-build-and-helm-chart/my-service:"$next_version"
+      docker login docker.pkg.github.com -u BhuwanUpadhyay -p "$GITHUB_TOKEN"
       docker tag docker.io/bhuwanupadhyay/my-service:"$next_version" "$DOCKER_PKG"
       docker push "$DOCKER_PKG"
 
@@ -24,7 +25,7 @@ case ${option} in
       REPO="semantic-versioning-on-docker-build-and-helm-chart"
       TAG="v$next_version"
       FILE_NAME=my-service-"$next_version".tgz
-      FILE_PATH="target/helm/repo/$next_version"
+      FILE_PATH="./target/helm/repo/$next_version"
 
       # Find a release by tag then upload a file:
       "$HOME"/ok.sh list_releases "$USER" "$REPO" \
