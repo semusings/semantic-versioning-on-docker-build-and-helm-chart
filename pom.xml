@@ -75,15 +75,10 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>repackage</goal>
-                        </goals>
-                    </execution>
-                </executions>
                 <configuration>
-                    <layout>JAR</layout>
+                    <layers>
+                        <enabled>true</enabled>
+                    </layers>
                 </configuration>
             </plugin>
             <plugin>
@@ -145,11 +140,8 @@
                 </executions>
                 <configuration>
                     <repository>docker.io/bhuwanupadhyay/${project.artifactId}</repository>
+                    <dockerfile>${project.basedir}/src/main/docker/Dockerfile</dockerfile>
                     <tag>${project.version}</tag>
-                    <dockerConfigFile>${project.basedir}/src/main/Dockerfile</dockerConfigFile>
-                    <buildArgs>
-                        <JAR_FILE>${project.build.finalName}.jar</JAR_FILE>
-                    </buildArgs>
                 </configuration>
             </plugin>
             <plugin>
