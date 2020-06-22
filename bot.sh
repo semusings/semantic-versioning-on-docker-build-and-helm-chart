@@ -20,7 +20,7 @@ case ${option} in
       HELM_CHART_FILE_PATH="$(pwd)/target/helm/repo/$FILE_NAME"
 
       # TODO: yourself
-      # Write script to upload your helm chart in your Artifactory or chart museum.
+      # Write a suitable script to upload your helm chart in your Artifactory or chart museum.
 
       echo "Mock publish: $HELM_CHART from $HELM_CHART_FILE_PATH"
       ;;
