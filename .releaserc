@@ -7,8 +7,8 @@
       "@semantic-release/git",
       "@semantic-release/changelog",
       ["@semantic-release/exec", {
-            "prepareCmd" : "",
-            "publishCmd" : ""
+            "prepareCmd" : "echo 'Version ${nextRelease.version}'",
+            "publishCmd" : "echo 'Version ${nextRelease.version}'"
             }]
     ]
 }
