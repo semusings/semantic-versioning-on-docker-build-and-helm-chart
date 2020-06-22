@@ -19,20 +19,15 @@ case ${option} in
       docker push "$DOCKER_PKG"
 
       # Publish Helm chart in Github Releases
-      curl "https://raw.githubusercontent.com/whiteinge/ok.sh/master/ok.sh" -o "$HOME/ok.sh"
-      chmod +x "$HOME"/ok.sh
       USER="BhuwanUpadhyay"
       REPO="semantic-versioning-on-docker-build-and-helm-chart"
       TAG="v$next_version"
       FILE_NAME="my-service-$next_version.tgz"
       FILE_PATH="$(pwd)/target/helm/repo/$FILE_NAME"
-
-      # Find a release by tag then upload a file:
-      "$HOME"/ok.sh list_releases "$USER" "$REPO" \
-          | awk -v "tag=$TAG" -F'\t' '$2 == tag { print $3 }' \
-          | xargs -I@ ok.sh release "$USER" "$REPO" @ _filter='.upload_url' \
-          | sed 's/{.*$/?name='"$FILE_NAME"'/' \
-          | xargs -I@ ok.sh upload_asset @ "$FILE_PATH"
+      GH_ASSET="https://uploads.github.com/repos/$USER/$REPO/releases/$TAG/assets?name=$FILE_NAME"
+      curl --data-binary @"$FILE_PATH" \
+        -H "Authorization: token $GITHUB_TOKEN" \
+        -H "Content-Type: application/octet-stream" "$GH_ASSET"
       ;;
    *)
       echo "`basename ${0}`:usage: [--prepare] | [--publish]"
