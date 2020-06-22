@@ -7,7 +7,7 @@
       "@semantic-release/git",
       "@semantic-release/changelog",
       ["@semantic-release/exec", {
-            "prepareCmd" : "./bot.sh --prepare ${nextRelease.version}'",
+            "prepareCmd" : "./bot.sh --prepare ${nextRelease.version}",
             "publishCmd" : "./bot.sh --publish ${nextRelease.version}"
             }]
     ]
